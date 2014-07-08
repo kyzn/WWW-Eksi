@@ -1,0 +1,28 @@
+Net-Eksisozluk version 0.01
+===========================
+
+This module provides a simple command line interface for eksisozluk,
+which is a user-based web dictionary, a famous web site in Turkey since 1999.
+You can get "debe" list (list of most voted entries from yesterday) by using
+this module. You can also get details of an entry by only giving the entry id.
+Currently it is of version 0.01, which can perform only basic operations.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2014 by Kivanc Yazan
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.14.2 or,
+at your option, any later version of Perl 5 you may have available.
+
+The data you reach by using this module might be subject to the
+copyright terms of Eksisozluk. See eksisozluk.com for details.

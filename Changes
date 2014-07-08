@@ -1,0 +1,6 @@
+Revision history for Perl extension Net::Eksisozluk.
+
+0.01  Tue Jul  8 21:23:40 2014
+	- original version; created by h2xs 1.23 with options
+		-AX Net::Eksisozluk
+
