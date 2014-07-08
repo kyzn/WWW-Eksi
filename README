@@ -16,6 +16,12 @@ To install this module type the following:
    make test
    make install
 
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+  LWP::Simple
+
 COPYRIGHT AND LICENCE
 
 Copyright (C) 2014 by Kivanc Yazan

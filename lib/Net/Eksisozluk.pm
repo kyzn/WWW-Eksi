@@ -4,6 +4,8 @@ use 5.014002;
 use strict;
 use warnings;
 
+use LWP::Simple;
+
 require Exporter;
 
 our @ISA = qw(Exporter);
