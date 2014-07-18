@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'Net::Eksisozluk',
     VERSION_FROM      => 'lib/Net/Eksisozluk.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => {LWP::Simple,DateTime} # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Net/Eksisozluk.pm', # retrieve abstract from module
        AUTHOR         => 'Kivanc Yazan <k@kyzn.org>') : ()),
