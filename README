@@ -1,4 +1,4 @@
-Net-Eksisozluk version 0.03
+Net-Eksisozluk version 0.04
 ===========================
 
 This module provides a simple command line interface for eksisozluk,
@@ -6,14 +6,14 @@ which is a user-based web dictionary, a famous web site in Turkey since 1999.
 You can get "debe" list (list of most voted entries from yesterday) by using
 this module as noted below.
 
-	my @entries_array=Net::Eksisozluk::get_current_debe();
+	my @entries_array=get_current_debe();
 
 This will return the entry id's of the online debe list. Element at index 0 will be a dummy -1, element at 1 is the first entry, 2 is second and so on.
 
 You can also get details of an entry by only giving the entry id.
 
 	my $id=1;
-	my %entry=Net::Eksisozluk::get_entry_by_id($id);
+	my %entry=get_entry_by_id($id);
 
 This will return a hash with the values below.
 
@@ -54,6 +54,8 @@ This module requires these other modules and libraries:
 
   LWP::UserAgent
   DateTime
+
+ExtUtils::MakeMaker might also be required to run the Makefile.pl.
 
 COPYRIGHT AND LICENCE
 

@@ -1,12 +1,12 @@
-use 5.014002;
 use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
 WriteMakefile(
     NAME              => 'Net::Eksisozluk',
-    VERSION_FROM      => 'lib/Net/Eksisozluk.pm', # finds $VERSION
-    PREREQ_PM         => {LWP::UserAgent,DateTime} # e.g., Module::Name => 1.1
-    ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/Net/Eksisozluk.pm', # retrieve abstract from module
+    VERSION_FROM      => 'lib/Net/Eksisozluk.pm',
+    PREREQ_PM         => {
+    	'LWP::UserAgent' => 3.10,
+    	'DateTime' => 1.10,
+    	},
+    ($] >= 5.005 ?     
+      (ABSTRACT_FROM  => 'lib/Net/Eksisozluk.pm',
        AUTHOR         => 'Kivanc Yazan <k@kyzn.org>') : ()),
 );

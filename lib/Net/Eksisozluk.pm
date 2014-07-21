@@ -1,6 +1,5 @@
 package Net::Eksisozluk;
 
-use 5.014002;
 use strict;
 use warnings;
 use DateTime;
@@ -15,7 +14,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 #Variables to be used throughout the program.
