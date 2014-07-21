@@ -4,17 +4,18 @@ use 5.014002;
 use strict;
 use warnings;
 use DateTime;
-use LWP::Simple;
+use LWP::UserAgent;
 
 require Exporter;
 our @ISA = qw(Exporter);
 our %EXPORT_TAGS = ( 'all' => [ qw(
 	get_entry_by_id
-
+	get_current_debe
 ) ] );
+
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 
 #Variables to be used throughout the program.
@@ -22,7 +23,7 @@ my $date_now   = DateTime->now->set_time_zone('Europe/Istanbul');
 my $date_search = DateTime->now->subtract(days=>1)->ymd;
 #my $date_file   = DateTime->now->subtract(days=>1)->dmy;
 #my $date_today  = DateTime->now->dmy;
-my $link_stats="https://eksisozluk.com/istatistik/dunun-en-begenilen-entryleri";
+my $link_debe="https://eksisozluk.com/istatistik/dunun-en-begenilen-entryleri";
 my $link_entry="https://eksisozluk.com/entry/";
 my $link_topic="https://eksisozluk.com/";
 my $link_search = "?a=search&searchform.when.from=$date_search";
@@ -164,6 +165,38 @@ sub get_entry_by_id{
 
 	return %entry;
 
+}
+
+sub get_current_debe{
+	my @debe;
+	#partial list problem is not handled yet. (where you got 60 entries)
+	my $ua = LWP::UserAgent->new;
+	$ua->timeout(10);
+	$ua->env_proxy;
+	my $response = $ua->get("$link_debe");
+	my $downloaded_debe_file;
+	
+	if($response->is_success){
+		$downloaded_debe_file=$response->decoded_content;
+
+		push @debe,-1;
+
+
+		while($downloaded_debe_file =~ /%23(\d+)">/){
+			push @debe,$1;
+			$downloaded_debe_file=~s/%23(\d+)">/%23XXXX">/;
+		}
+
+		if(scalar(@debe)!=51){
+			my $miscount = scalar(@debe) -1;
+			die "Debe list has $miscount entries";
+		}
+	
+	}else{
+		die "Error on downloading debe. Response: ".$response->status_line;
+	}
+
+	return @debe;
 }
 
 
