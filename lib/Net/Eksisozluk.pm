@@ -14,7 +14,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 #Variables to be used throughout the program.
@@ -219,6 +219,10 @@ Net::Eksisozluk - Perl extension to grab entries and lists of entries from eksis
 =head1 SYNOPSIS
 
   use Net::Eksisozluk;
+  my @entries_array=get_current_debe();
+  my $id=$entries_array[1];
+  my %entry=get_entry_by_id($id);
+  print $entry{'author'};
 
 =head1 DESCRIPTION
 
@@ -230,9 +234,8 @@ this module. You can also get details of an entry by only giving the entry id.
 
 =head2 EXPORT
 
-None by default.
-
-
+  get_current_debe()
+  get_entry_by_id($id)
 
 =head1 SEE ALSO
 
