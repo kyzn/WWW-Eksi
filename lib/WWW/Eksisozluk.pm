@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use DateTime;
 use LWP::UserAgent;
-use List::MoreUtils;
 
 require Exporter;
 our @ISA = qw(Exporter);
