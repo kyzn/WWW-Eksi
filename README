@@ -4,18 +4,19 @@ WWW::Eksisozluk version 0.06
 This module provides a simple command line interface for eksisozluk,
 which is a user-based web dictionary, a famous web site in Turkey since 1999.
 You can get "debe" list (list of most voted entries from yesterday) by using
-this module as noted below.
+this module.
 
-	my @entries=debe_ids();
+	use WWW::Eksisozluk;
+	my $eksi  = WWW::Eksisozluk->new();
+	my @debe  = $eksi->debe_ids();
 
 This will return the entry id's of the online debe list. Element at index 0 will be a the first entry, 1 is second and so on.
 
 You can also get details of an entry by only giving the entry id.
 
-	my $id=1;
-	my %entry=entry($id);
+	my %entry = $eksi->entry($debe[0]);
 
-This will return a hash with the values below.
+Ideally, you should call these methods from an object. This will return a hash with the values below.
 
 	'id' # is the id of the entry. it was already given by the user.
 	'id_link' # is the direct link to the entry.

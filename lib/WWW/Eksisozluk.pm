@@ -4,18 +4,18 @@ use strict;
 use warnings;
 use DateTime;
 use LWP::UserAgent;
+use List::MoreUtils;
 
 require Exporter;
 our @ISA = qw(Exporter);
 our %EXPORT_TAGS = ( 'all' => [ qw(
-	debe_ids
-	entry
+	new
 ) ] );
 
-our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
+#our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
+our @EXPORT_OK = ( 'new' );
 our @EXPORT = qw();
-our $VERSION = '0.06_03';
-#dev through 0.06
+our $VERSION = '0.06';
 
 #Variables to be used throughout the program.
 my $date_now   = DateTime->now->set_time_zone('Europe/Istanbul'); 
@@ -28,19 +28,23 @@ my $link_topic="https://eksisozluk.com/";
 my $link_search = "?a=search&searchform.when.from=$date_search";
 
 
+sub new
+{
+    my $class = shift;
+    my $self = {};
+    bless $self, $class;
+    return $self;
+}
+
 sub entry{
 
-	#Die if no arguments.
-	if(scalar(@_)<1){
-		die "No argument passed to get_entry_by_id";
-	}
-	
-	#Get id from arguments otherwise.
-	my $id = $_[0];
+	#Get id from arguments.
+	my $class = shift;
+	my $id = shift;
 
 	#Test if satisfies id number format.
 	if($id !~ /^\d{1,9}$/ || $id==0){
-		die "Argument passed to the get_entry_by_id is of wrong format";
+		die "Argument passed to the get_entry_by_id is of wrong format. It might be possible that you didn't call this method from an object. See readme file.";
 	}
 
 	my %entry = (
@@ -168,7 +172,6 @@ sub entry{
 
 sub debe_ids{
 	my @debe;
-	#partial list problem is not handled yet. (where you got 60 entries)
 	my $ua = LWP::UserAgent->new;
 	$ua->timeout(10);
 	$ua->env_proxy;
@@ -180,7 +183,12 @@ sub debe_ids{
 
 
 		while($downloaded_debe_file =~ /%23(\d+)">/){
-			push @debe,$1;
+
+			#If the matched entry id did not added before, then add.
+			if(!($1 ~~ @debe)){
+				push @debe,$1;
+			}
+			#Otherwise just cross it, don't add something twice.
 			$downloaded_debe_file=~s/%23(\d+)">/%23XXXX">/;
 		}
 
@@ -216,11 +224,10 @@ WWW::Eksisozluk - Perl extension to grab entries and lists of entries from eksis
 
 =head1 SYNOPSIS
 
-  use WWW::Eksisozluk;
-  my @entries=debe_ids();
-  my $id=$entries[0];
-  my %entry=entry($id);
-  print $entry{'author'};
+	use WWW::Eksisozluk;
+	my $eksi  = WWW::Eksisozluk->new();
+	my @debe  = $eksi->debe_ids();
+	my %entry = $eksi->entry($debe[0]);
 
 =head1 DESCRIPTION
 
@@ -232,8 +239,9 @@ this module. You can also get details of an entry by only giving the entry id.
 
 =head2 EXPORT
 
-  debe_ids()
-  entry($id)
+  new()
+
+You should create a new Eksisozluk object and call "debe_ids" and "entry" methods from there as shown in synopsis.
 
 =head1 SEE ALSO
 

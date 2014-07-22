@@ -1,16 +1,17 @@
 Revision history for Perl extension WWW::Eksisozluk.
 
-0.06  
+0.06  Tue Jul 22 2014
 	- Changed namespace from "Net" to "WWW" as proposed by PrePAN community
 	- get_entry_by_id is renamed as entry
 	- get_current_debe is renamed as debe_ids
 	- debe_ids returns in 0..49, it was 1..50 where [0] was a dummy -1
+	- Partial list problem is handled at which you get 60 entries. Now you don't. It simply doesn't re-add already added value.
+	- Script now has a object oriented interface. You can call my $eksi = WWW::Eksisozluk->new(); and work from there.
 
-0.05  Mon Jul 21
+0.05  Mon Jul 21 2014
 	- get_entry_by_id($id)
 	- get_current_debe
 
 0.01  Tue Jul  8 21:23:40 2014
 	- original version; created by h2xs 1.23 with options
 		-AX Net::Eksisozluk
-
