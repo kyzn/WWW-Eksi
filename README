@@ -1,4 +1,4 @@
-WWW::Eksisozluk version 0.06
+WWW::Eksisozluk version 0.07
 ============================
 
 This module provides a simple command line interface for eksisozluk,
@@ -54,15 +54,10 @@ DEPENDENCIES
 This module requires these other modules and libraries:
 
   LWP::UserAgent
+  LWP::Protocol::https
   DateTime
 
 ExtUtils::MakeMaker might also be required to run the Makefile.pl.
-
-TODO
-
-More tests are to be implemented.
-Tweets in entries can be embed.
-Referred entries can be embed.
 
 COPYRIGHT AND LICENCE
 

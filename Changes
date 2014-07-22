@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Eksisozluk.
 
+0.07
+	- author_link is going to be added
+
 0.06  Tue Jul 22 2014
 	- Changed namespace from "Net" to "WWW" as proposed by PrePAN community
 	- get_entry_by_id is renamed as entry

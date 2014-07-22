@@ -14,7 +14,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 #our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT_OK = ( 'new' );
 our @EXPORT = qw();
-our $VERSION = '0.06';
+our $VERSION = '0.07_01';
 
 #Variables to be used throughout the program.
 my $date_now   = DateTime->now->set_time_zone('Europe/Istanbul'); 
@@ -217,6 +217,8 @@ sub longgoogl{
 1;
 __END__
 
+===========================
+
 =head1 NAME
 
 WWW::Eksisozluk - Perl extension to grab entries and lists of entries from eksisozluk (eksisozluk.com).
@@ -233,7 +235,33 @@ WWW::Eksisozluk - Perl extension to grab entries and lists of entries from eksis
 This module provides a simple command line interface for eksisozluk,
 which is a user-based web dictionary, a famous web site in Turkey since 1999.
 You can get "debe" list (list of most voted entries from yesterday) by using
-this module. You can also get details of an entry by only giving the entry id.
+this module.
+
+debe_ids() will return the entry id's of the online debe list. Element at index
+0 will be the first entry, 1 is second and so on. You can also get details of an
+entry by only giving the entry id to entry(). Ideally, you should call these methods
+from an object. This will return a hash with the values below.
+
+	'id' # is the id of the entry. it was already given by the user.
+	'id_link' # is the direct link to the entry.
+	'id_ref' # is the id of the reference entry. reference entry is the first entry of the day in the same topic. it might be equal to id.
+	'date_accessed' # will show the date-time of the script running.
+
+	'is_found' # will show whether entry is found or not. will return 0 if entry is deleted, or not written yet.
+
+	'topic' # is the topic of the entry.
+	'topic_link' # is the link of the topic. can be used for search.
+	'number_in_topic' # is the order of the entry in the topic.
+			
+	'date_published' # is the date-time entry is first published.
+	'is_modified' # will show if the entry is modified or not.
+	'date_modified' # is the date entry is modified. if it is not modified, will return 0.
+	'date_print' # is the human readable date that can be used to print.
+
+	'author' # is the username who wrote the entry.
+	'body_raw' # is the raw entry, as downloaded from eksisozluk directly.
+	'body' # is the edited entry, several fixes is applied to the raw.
+	'fav_count' # is the number that shows the time that entry is marked as favourite.
 
 
 =head2 EXPORT
@@ -244,11 +272,11 @@ You should create a new Eksisozluk object and call "debe_ids" and "entry" method
 
 =head1 SEE ALSO
 
-Follow and/or contribute to the development of this package at <http://www.github.com/kyzn/net-eksisozluk>.
+Follow and/or contribute to the development of this package at http://www.github.com/kyzn/net-eksisozluk
 
 =head1 AUTHOR
 
-Kivanc Yazan <lt>k@kyzn.org<gt>
+Kivanc Yazan
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -257,6 +285,9 @@ Copyright (C) 2014 by Kivanc Yazan
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.14.2 or,
 at your option, any later version of Perl 5 you may have available.
+
+The data you reach by using this module might be subject to the
+copyright terms of Eksisozluk. See eksisozluk.com for details.
 
 
 =cut
