@@ -8,13 +8,13 @@ use LWP::UserAgent;
 require Exporter;
 our @ISA = qw(Exporter);
 our %EXPORT_TAGS = ( 'all' => [ qw(
-	get_entry
-	get_debe
+	debe_ids
+	entry
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
-our $VERSION = '0.06_02';
+our $VERSION = '0.06_03';
 #dev through 0.06
 
 #Variables to be used throughout the program.
@@ -28,7 +28,7 @@ my $link_topic="https://eksisozluk.com/";
 my $link_search = "?a=search&searchform.when.from=$date_search";
 
 
-sub get_entry{
+sub entry{
 
 	#Die if no arguments.
 	if(scalar(@_)<1){
@@ -166,7 +166,7 @@ sub get_entry{
 
 }
 
-sub get_debe{
+sub debe_ids{
 	my @debe;
 	#partial list problem is not handled yet. (where you got 60 entries)
 	my $ua = LWP::UserAgent->new;
@@ -217,9 +217,9 @@ WWW::Eksisozluk - Perl extension to grab entries and lists of entries from eksis
 =head1 SYNOPSIS
 
   use WWW::Eksisozluk;
-  my @entries=get_debe();
+  my @entries=debe_ids();
   my $id=$entries[0];
-  my %entry=get_entry($id);
+  my %entry=entry($id);
   print $entry{'author'};
 
 =head1 DESCRIPTION
@@ -232,8 +232,8 @@ this module. You can also get details of an entry by only giving the entry id.
 
 =head2 EXPORT
 
-  get_debe()
-  get_entry($id)
+  debe_ids()
+  entry($id)
 
 =head1 SEE ALSO
 

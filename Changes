@@ -1,8 +1,10 @@
 Revision history for Perl extension WWW::Eksisozluk.
 
 0.06  
-	- Changed domain from "Net" to "WWW" as proposed by PrePAN community
-	- 
+	- Changed namespace from "Net" to "WWW" as proposed by PrePAN community
+	- get_entry_by_id is renamed as entry
+	- get_current_debe is renamed as debe_ids
+	- debe_ids returns in 0..49, it was 1..50 where [0] was a dummy -1
 
 0.05  Mon Jul 21
 	- get_entry_by_id($id)
