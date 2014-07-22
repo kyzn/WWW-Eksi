@@ -14,8 +14,8 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
-our $VERSION = '0.05';
-
+our $VERSION = '0.06_01';
+#dev through 0.06
 
 #Variables to be used throughout the program.
 my $date_now   = DateTime->now->set_time_zone('Europe/Istanbul'); 
@@ -30,6 +30,11 @@ my $link_search = "?a=search&searchform.when.from=$date_search";
 
 sub get_entry_by_id{
 
+	#Die if no arguments.
+	if(scalar(@_)<1){
+		die "No argument passed to get_entry_by_id";
+	}
+	
 	#Get id from arguments otherwise.
 	my $id = $_[0];
 
@@ -60,11 +65,6 @@ sub get_entry_by_id{
 		'body' => "",
 		'fav_count' => 0
 	);
-
-	#Die if no arguments.
-	if(scalar(@_)<1){
-		die "No argument passed to get_entry_by_id";
-	}
 		
 	#Get the entry file.
 	my $ua = LWP::UserAgent->new;
