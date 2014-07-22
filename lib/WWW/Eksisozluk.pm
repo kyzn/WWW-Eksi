@@ -8,8 +8,8 @@ use LWP::UserAgent;
 require Exporter;
 our @ISA = qw(Exporter);
 our %EXPORT_TAGS = ( 'all' => [ qw(
-	get_entry_by_id
-	get_current_debe
+	get_entry
+	get_debe
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
@@ -28,7 +28,7 @@ my $link_topic="https://eksisozluk.com/";
 my $link_search = "?a=search&searchform.when.from=$date_search";
 
 
-sub get_entry_by_id{
+sub get_entry{
 
 	#Die if no arguments.
 	if(scalar(@_)<1){
@@ -166,7 +166,7 @@ sub get_entry_by_id{
 
 }
 
-sub get_current_debe{
+sub get_debe{
 	my @debe;
 	#partial list problem is not handled yet. (where you got 60 entries)
 	my $ua = LWP::UserAgent->new;
@@ -178,16 +178,14 @@ sub get_current_debe{
 	if($response->is_success){
 		$downloaded_debe_file=$response->decoded_content;
 
-		push @debe,-1;
-
 
 		while($downloaded_debe_file =~ /%23(\d+)">/){
 			push @debe,$1;
 			$downloaded_debe_file=~s/%23(\d+)">/%23XXXX">/;
 		}
 
-		if(scalar(@debe)!=51){
-			my $miscount = scalar(@debe) -1;
+		if(scalar(@debe)!=50){
+			my $miscount = scalar(@debe);
 			die "Debe list has $miscount entries";
 		}
 	
@@ -219,9 +217,9 @@ WWW::Eksisozluk - Perl extension to grab entries and lists of entries from eksis
 =head1 SYNOPSIS
 
   use WWW::Eksisozluk;
-  my @entries_array=get_current_debe();
-  my $id=$entries_array[1];
-  my %entry=get_entry_by_id($id);
+  my @entries=get_debe();
+  my $id=$entries[0];
+  my %entry=get_entry($id);
   print $entry{'author'};
 
 =head1 DESCRIPTION
@@ -234,8 +232,8 @@ this module. You can also get details of an entry by only giving the entry id.
 
 =head2 EXPORT
 
-  get_current_debe()
-  get_entry_by_id($id)
+  get_debe()
+  get_entry($id)
 
 =head1 SEE ALSO
 
