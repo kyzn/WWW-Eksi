@@ -1,5 +1,5 @@
 WWW::Eksisozluk version 0.06
-===========================
+============================
 
 This module provides a simple command line interface for eksisozluk,
 which is a user-based web dictionary, a famous web site in Turkey since 1999.
