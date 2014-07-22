@@ -1,6 +1,8 @@
-Revision history for Perl extension Net::Eksisozluk.
+Revision history for Perl extension WWW::Eksisozluk.
 
 0.06  
+	- Changed domain from "Net" to "WWW" as proposed by preprod community
+	- 
 
 0.05  Mon Jul 21
 	- get_entry_by_id($id)

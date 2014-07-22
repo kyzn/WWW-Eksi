@@ -1,4 +1,4 @@
-package Net::Eksisozluk;
+package WWW::Eksisozluk;
 
 use strict;
 use warnings;
@@ -14,7 +14,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
-our $VERSION = '0.06_01';
+our $VERSION = '0.06_02';
 #dev through 0.06
 
 #Variables to be used throughout the program.
@@ -214,11 +214,11 @@ __END__
 
 =head1 NAME
 
-Net::Eksisozluk - Perl extension to grab entries and lists of entries from eksisozluk (eksisozluk.com).
+WWW::Eksisozluk - Perl extension to grab entries and lists of entries from eksisozluk (eksisozluk.com).
 
 =head1 SYNOPSIS
 
-  use Net::Eksisozluk;
+  use WWW::Eksisozluk;
   my @entries_array=get_current_debe();
   my $id=$entries_array[1];
   my %entry=get_entry_by_id($id);

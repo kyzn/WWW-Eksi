@@ -9,7 +9,7 @@ use strict;
 use warnings;
 
 use Test::More tests => 1;
-BEGIN { use_ok('Net::Eksisozluk') };
+BEGIN { use_ok('WWW::Eksisozluk') };
 
 #########################
 

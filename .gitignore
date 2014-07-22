@@ -17,5 +17,5 @@ nytprof.out
 /pm_to_blib
 *.o
 *.bs
-lib/Net/test.pl
+lib/WWW/test.pl
 .DS_STORE

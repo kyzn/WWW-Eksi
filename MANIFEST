@@ -2,5 +2,5 @@ Changes
 Makefile.PL
 MANIFEST
 README
-t/Net-Eksisozluk.t
-lib/Net/Eksisozluk.pm
+t/WWW-Eksisozluk.t
+lib/WWW/Eksisozluk.pm
