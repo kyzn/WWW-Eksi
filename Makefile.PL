@@ -5,6 +5,7 @@ WriteMakefile(
     PREREQ_PM         => {
     	'LWP::UserAgent' => 3.10,
     	'DateTime' => 1.10,
+    	'LWP::Protocol::https' => 6.04,
     	},
     ($] >= 5.005 ?     
       (ABSTRACT_FROM  => 'lib/WWW/Eksisozluk.pm',
