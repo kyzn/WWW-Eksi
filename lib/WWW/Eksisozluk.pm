@@ -14,7 +14,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 #our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT_OK = ( 'new' );
 our @EXPORT = qw();
-our $VERSION = '0.07_02';
+our $VERSION = '0.07';
 
 #Variables to be used throughout the program.
 my $date_now   = DateTime->now->set_time_zone('Europe/Istanbul'); 
@@ -22,6 +22,7 @@ my $date_search = DateTime->now->subtract(days=>1)->ymd;
 #my $date_file   = DateTime->now->subtract(days=>1)->dmy;
 #my $date_today  = DateTime->now->dmy;
 my $link_debe="https://eksisozluk.com/istatistik/dunun-en-begenilen-entryleri";
+my $link_author="https://eksisozluk.com/biri/";
 my $link_entry="https://eksisozluk.com/entry/";
 my $link_topic="https://eksisozluk.com/";
 my $link_search = "?a=search&searchform.when.from=$date_search";
@@ -64,6 +65,7 @@ sub entry{
 		'date_print' => 0,
 
 		'author' => "",
+		'author_link' => "",
 		'body_raw' => "",
 		'body' => "",
 		'fav_count' => 0
@@ -112,6 +114,7 @@ sub entry{
 	#author
     if($downloaded_entry_file=~/data-author="(.*)" data-flags/){
     	$entry{'author'}=$1;
+    	$entry{'author_link'}=$link_author.$1;
     }
 
    	#body_raw, body
@@ -139,7 +142,7 @@ sub entry{
     $entry{'body'}=~s/(href="https?:\/\/[^.]*\.?imgur.com\/\w{7})"/$1\.jpg"/g;
 
     #body: add img src to display images that are jpg jpeg png gif
-    $entry{'body'}=~s/(href="([^"]*\.(jpe?g|png|gif)(:large)?)"[^<]*<\/a>)/$1<br><br><img src="$2" style="max-width:300px;"><br><br>/g;
+    $entry{'body'}=~s/(href="([^"]*\.(jpe?g|png|gif)(:large)?)"[^<]*<\/a>)/$1<br><br><img src="$2"><br><br>/g;
     
     #body: add a northwest arrow, and domain name in parantheses
     $entry{'body'}=~s/(https?:\/\/(?!eksisozluk.com)([^\/<]*\.[^\/<]*)[^<]*<\/a>)/$1 \($2 &#8599;\)/g;
@@ -259,6 +262,7 @@ from an object. This will return a hash with the values below.
 	'date_print' # is the human readable date that can be used to print.
 
 	'author' # is the username who wrote the entry.
+	'author_link' # is the link of the author.
 	'body_raw' # is the raw entry, as downloaded from eksisozluk directly.
 	'body' # is the edited entry, several fixes is applied to the raw.
 	'fav_count' # is the number that shows the time that entry is marked as favourite.

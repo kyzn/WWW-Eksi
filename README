@@ -35,6 +35,7 @@ Ideally, you should call these methods from an object. This will return a hash w
 	'date_print' # is the human readable date that can be used to print.
 
 	'author' # is the username who wrote the entry.
+	'author_link' # is the link of the author.
 	'body_raw' # is the raw entry, as downloaded from eksisozluk directly.
 	'body' # is the edited entry, several fixes is applied to the raw.
 	'fav_count' # is the number that shows the time that entry is marked as favourite.
