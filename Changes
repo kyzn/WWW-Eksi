@@ -1,6 +1,10 @@
 Revision history for Perl extension WWW::Eksisozluk.
 
-0.07
+
+0.08
+	- Test added
+
+0.07  Sun Aug 03 2014
 	- author_link is added
 	- style max-width from body's img is removed
 

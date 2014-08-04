@@ -14,7 +14,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 #our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT_OK = ( 'new' );
 our @EXPORT = qw();
-our $VERSION = '0.07';
+our $VERSION = '0.08_01';
 
 #Variables to be used throughout the program.
 my $date_now   = DateTime->now->set_time_zone('Europe/Istanbul'); 
@@ -173,6 +173,7 @@ sub entry{
 }
 
 sub debe_ids{
+
 	my @debe;
 	my $ua = LWP::UserAgent->new;
 	$ua->timeout(10);
@@ -276,7 +277,7 @@ You should create a new Eksisozluk object and call "debe_ids" and "entry" method
 
 =head1 SEE ALSO
 
-Follow and/or contribute to the development of this package at http://www.github.com/kyzn/net-eksisozluk
+Follow and/or contribute to the development of this package at L<http://www.github.com/kyzn/net-eksisozluk>
 
 =head1 AUTHOR
 
