@@ -19,3 +19,4 @@ nytprof.out
 *.bs
 lib/WWW/test.pl
 .DS_STORE
+.project

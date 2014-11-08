@@ -4,11 +4,13 @@ WWW::Eksisozluk version 0.08
 This module provides a simple command line interface for eksisozluk,
 which is a user-based web dictionary, a famous web site in Turkey since 1999.
 You can get "debe" list (list of most voted entries from yesterday) by using
-this module.
+this module. You can also get list of popular topics.
 
 	use WWW::Eksisozluk;
 	my $eksi  = WWW::Eksisozluk->new();
 	my @debe  = $eksi->debe_ids();
+	my %popular = $eksi->popular();
+
 
 This will return the entry id's of the online debe list. Element at index 0 will be a the first entry, 1 is second and so on.
 
@@ -40,7 +42,6 @@ Ideally, you should call these methods from an object. This will return a hash w
 	'body' # is the edited entry, several fixes is applied to the raw.
 	'fav_count' # is the number that shows the time that entry is marked as favourite.
 
-
 INSTALLATION
 
 To install this module type the following:
@@ -57,6 +58,9 @@ This module requires these other modules and libraries:
   LWP::UserAgent
   LWP::Protocol::https
   DateTime
+  experimental
+  Mozilla::CA
+  utf8::all
 
 ExtUtils::MakeMaker might also be required to run the Makefile.pl.
 

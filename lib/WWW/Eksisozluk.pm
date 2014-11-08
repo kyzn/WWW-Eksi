@@ -4,6 +4,8 @@ use strict;
 use warnings;
 use DateTime;
 use LWP::UserAgent;
+use experimental 'smartmatch';
+use utf8::all;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -26,7 +28,7 @@ my $link_author="https://eksisozluk.com/biri/";
 my $link_entry="https://eksisozluk.com/entry/";
 my $link_topic="https://eksisozluk.com/";
 my $link_search = "?a=search&searchform.when.from=$date_search";
-
+my $link_popular="https://eksisozluk.com/basliklar/populer?p=";
 
 sub new
 {
@@ -84,8 +86,9 @@ sub entry{
 	}else{
 		#return with is_found=0
 		return %entry;
-		#Another possible way of handling.
+		#Another possible way of handling could have been:
 		#die "Error on downloading entry. Response: ".$response->status_line;
+		#TODO ask user which way he/she wishes, ie. take parameters to handle this issue.
 	}
 
 	#topic & topic_link
@@ -172,6 +175,63 @@ sub entry{
 
 }
 
+
+sub popular{
+
+	my $currentpage = 0;
+	my $pagecount = 1;
+	my %popular_topics;
+
+	while($currentpage<$pagecount){
+
+		#update pagecount
+		$currentpage++;
+
+		my $ua = LWP::UserAgent->new;
+		$ua->timeout(10);
+		$ua->env_proxy;
+		my $response = $ua->get("$link_popular$currentpage");
+		my $downloaded_popular_file;
+
+		if($response->is_success){	
+			$downloaded_popular_file=$response->decoded_content;
+
+			#Die if downloaded page's number does not match what was expected.
+			if($downloaded_popular_file=~/data-currentpage="(\d+)"/ && $currentpage != $1){
+				die("Asked for page \#$currentpage, got page \#$1.");
+			}
+		
+			#Get the pagecount value only once.
+			if($pagecount == 1 && $downloaded_popular_file=~/data-pagecount="(\d+)"/){
+				$pagecount = $1;
+			}
+
+			#We might have removed left frame populars here, but it doesn't really matter.
+
+			#Add topics to the hash, with the number of entries in it.
+			while($downloaded_popular_file =~ />(.*)\s?<small>(\d+)</){
+
+				#Add if not added before
+				if(!($1 ~~ %popular_topics)){
+					$popular_topics{"$1"}=$2;
+				}
+				#Cross out the processed one
+				$downloaded_popular_file=~s/>(.*)\s<small>(\d+)</-----/;
+			}
+
+		}else{
+			die "Error on downloading popular page. Response: ".$response->status_line;
+		}
+
+	}
+
+	return %popular_topics;
+
+}
+
+
+
+
 sub debe_ids{
 
 	my @debe;
@@ -201,7 +261,7 @@ sub debe_ids{
 		}
 	
 	}else{
-		die "Error on downloading debe. Response: ".$response->status_line;
+		die "Error on downloading data. Response: ".$response->status_line;
 	}
 
 	return @debe;
@@ -233,6 +293,7 @@ WWW::Eksisozluk - Perl extension to grab entries and lists of entries from eksis
 	my $eksi  = WWW::Eksisozluk->new();
 	my @debe  = $eksi->debe_ids();
 	my %entry = $eksi->entry($debe[0]);
+	my %popular = $eksi->popular();
 
 =head1 DESCRIPTION
 
@@ -268,6 +329,7 @@ from an object. This will return a hash with the values below.
 	'body' # is the edited entry, several fixes is applied to the raw.
 	'fav_count' # is the number that shows the time that entry is marked as favourite.
 
+popular() will return currently popular topics, with the number of popular entries they contain.
 
 =head2 EXPORT
 

@@ -2,7 +2,7 @@ Revision history for Perl extension WWW::Eksisozluk.
 
 
 0.08
-	- Test added
+	- List of popular topics (%popular)
 
 0.07  Sun Aug 03 2014
 	- author_link is added
