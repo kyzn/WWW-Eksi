@@ -16,7 +16,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 #our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT_OK = ( 'new' );
 our @EXPORT = qw();
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 #Variables to be used throughout the program.
 my $date_now   = DateTime->now->set_time_zone('Europe/Istanbul'); 

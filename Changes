@@ -1,6 +1,9 @@
 Revision history for Perl extension WWW::Eksisozluk.
 
 
+0.09
+	- A semicolon was missing on dependency list
+
 0.08
 	- List of popular topics (%popular)
 

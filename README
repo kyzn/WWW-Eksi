@@ -9,10 +9,12 @@ this module. You can also get list of popular topics.
 	use WWW::Eksisozluk;
 	my $eksi  = WWW::Eksisozluk->new();
 	my @debe  = $eksi->debe_ids();
-	my %popular = $eksi->popular();
-
 
 This will return the entry id's of the online debe list. Element at index 0 will be a the first entry, 1 is second and so on.
+
+	my %popular = $eksi->popular();
+
+And this will return a hash composed of popular topics, alongside with the number of popular entries they contain.
 
 You can also get details of an entry by only giving the entry id.
 
