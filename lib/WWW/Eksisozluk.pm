@@ -277,9 +277,18 @@ sub longgoogl{
 
 
 1;
-__END__
 
-===========================
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+WWW::Eksisozluk - Perl interface for Eksisozluk.com
+
+=head1 VERSION
+
+version 0.10
 
 =head1 SYNOPSIS
 
@@ -308,3 +317,21 @@ today, and popular topic lists.
 
 As a friendly note, data you reach by using this module might be subject to copyright 
 terms of Eksisozluk. See eksisozluk.com for details.
+
+=head1 AUTHOR
+
+Kivanc Yazan
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2015 by Kivanc Yazan.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+__END__
+
+===========================
+
