@@ -284,10 +284,19 @@ __END__
 =head1 SYNOPSIS
 
 	use WWW::Eksisozluk;
+	#You should create an object as shown below.
 	my $eksi    = WWW::Eksisozluk->new();
+
+	#IDs for today's debe list (element at index 0 is the top one)
 	my @debe    = $eksi->debe_ids();
+
+	#Details (body, author, date etc) of an entry with given id.
 	my %entry   = $eksi->entry($debe[0]);
+
+	#Popular topics with number of recent entries in it.
 	my %popular = $eksi->topiclist(popular);
+
+	#Today's topics with number of recent entries in it.
 	my %today   = $eksi->topiclist(today);
 
 =head1 DESCRIPTION
@@ -297,11 +306,7 @@ web dictionary written mostly in Turkish, active since 1999. You can get debe li
 (top entries of yesterday) by using this module. You can also reach topic list for
 today, and popular topic lists.
 
-entry(id): Details (topic, author, date, body etc.) of an entry with given id.
-debe_ids(): IDs for today's debe list (element at index 0 is the top one)
-topiclist(popular): Popular topics with number of recent entries in it.
-topiclist(today): Today's topics with number of recent entries in it.
-
 As a friendly note, data you reach by using this module might be subject to copyright 
 terms of Eksisozluk. See eksisozluk.com for details.
+
 =cut
