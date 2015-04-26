@@ -308,5 +308,3 @@ today, and popular topic lists.
 
 As a friendly note, data you reach by using this module might be subject to copyright 
 terms of Eksisozluk. See eksisozluk.com for details.
-
-=cut
