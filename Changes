@@ -9,6 +9,11 @@ TODO
 	- get channels
 	- future: login, post entry, upvote, downvote, comment, favorite etc.
 
+
+
+0.11 Mon Apr 27 2015
+    - Trying to fix 'decreasing version number' problem
+
 0.10 Sun Apr 26 2015
 	- move to dist:zilla
 	- entry->number_in_topic is deprecated (as it is removed by eksisozluk)

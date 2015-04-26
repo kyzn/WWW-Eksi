@@ -1,6 +1,6 @@
 package WWW::Eksisozluk;
 # ABSTRACT: Perl interface for Eksisozluk.com
-
+$WWW::Eksisozluk::VERSION = '0.11';
 use strict;
 use warnings;
 use DateTime;
@@ -288,7 +288,7 @@ WWW::Eksisozluk - Perl interface for Eksisozluk.com
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
