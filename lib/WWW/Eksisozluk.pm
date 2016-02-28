@@ -1,6 +1,6 @@
 package WWW::Eksisozluk;
 # ABSTRACT: Perl interface for Eksisozluk.com
-$WWW::Eksisozluk::VERSION = '0.11';
+$WWW::Eksisozluk::VERSION = '0.12';
 use strict;
 use warnings;
 use DateTime;
@@ -37,7 +37,7 @@ my %link = (
     'popular' => "https://eksisozluk.com/basliklar/populer?p=",
     'today'   => "https://eksisozluk.com/basliklar/bugun/"
 );
-my $sleeptime     = 5; #sleep after each request. 0 would mean disabled.
+my $sleeptime     = 15; #sleep after each request. 0 would mean disabled.
 
 
 
@@ -97,7 +97,7 @@ sub entry{
 	} 
 
 	#date
-	if($downloaded_entry_file=~/$entry{'id'}\s([\d\s\.\:~]+)/){
+	if($downloaded_entry_file=~/$entry{'id'}">([\d\s\.\:~]+)/){
     	$entry{'date'}=$1;
 	}
 	
@@ -108,7 +108,7 @@ sub entry{
     }
 
    	#body_raw, body
-    if($downloaded_entry_file=~/class=\"content\">(.*?)<\/div>/){
+    if($downloaded_entry_file=~/class=\"content\">\s+(.*?)\s+<\/div>/){
     	$entry{'body_raw'}=$1;
     	$entry{'body'}=$1; #handled below.
     }
@@ -288,7 +288,7 @@ WWW::Eksisozluk - Perl interface for Eksisozluk.com
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -303,10 +303,10 @@ version 0.11
 	my %entry   = $eksi->entry($debe[0]);
 
 	#Popular topics with number of recent entries in it.
-	my %popular = $eksi->topiclist(popular);
+	my %popular = $eksi->topiclist("popular");
 
 	#Today's topics with number of recent entries in it.
-	my %today   = $eksi->topiclist(today);
+	my %today   = $eksi->topiclist("today");
 
 =head1 DESCRIPTION
 
@@ -324,7 +324,7 @@ Kivanc Yazan
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015 by Kivanc Yazan.
+This software is copyright (c) 2016 by Kivanc Yazan.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
