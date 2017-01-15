@@ -251,6 +251,10 @@ Provides easy access to entries and lists of entries.
 
 Kivanc Yazan E<lt>kyzn@cpan.orgE<gt>
 
+=head1 CONTRIBUTORS
+
+Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
+
 =head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2017 by Kivanc Yazan.
