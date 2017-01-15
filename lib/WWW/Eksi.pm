@@ -5,6 +5,23 @@ our $VERSION='0.23';
 
 WWW::Eksi - Interface for Eksisozluk.com
 
+=head1 DESCRIPTION
+
+An interface for Eksisozluk, a Turkish social network.
+Provides easy access to entries and lists of entries.
+
+=head1 SYNOPSIS
+
+  use WWW::Eksi;
+  my $e = WWW::Eksi->new;
+
+  # Last week's most popular entries
+  my @ghebe_fast = $e->ghebe;    # might get rate limited
+  my @ghebe_slow = $e->ghebe(5); # add a politeness delay
+
+  # Single entry
+  my %entry   = $e->download_entry(1);
+
 =cut
 
 use warnings;
@@ -229,23 +246,6 @@ sub _process_entry{
 1;
 
 __END__
-
-=head1 SYNOPSIS
-
-  use WWW::Eksi;
-  my $e = WWW::Eksi->new;
-
-  # Last week's most popular entries
-  my @ghebe_fast = $e->ghebe;    # might get rate limited
-  my @ghebe_slow = $e->ghebe(5); # add a politeness delay
-
-  # Single entry
-  my %entry   = $e->download_entry(1);
-
-=head1 DESCRIPTION
-
-An interface for Eksisozluk, a Turkish social network.
-Provides easy access to entries and lists of entries.
 
 =head1 AUTHOR
 
