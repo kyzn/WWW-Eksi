@@ -1,3 +1,6 @@
+0.22  2017-01-15
+  - Typo
+
 0.21  2017-01-15
   - Use WWW::Lengthen (WWW::Expand has failing tests)
 

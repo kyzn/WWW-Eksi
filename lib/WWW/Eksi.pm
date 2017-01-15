@@ -189,7 +189,7 @@ sub _lengthen{
   my $u = URI->new($url) if $url;
   return 0 unless ( $url && $u && $u->scheme ~~ [qw/http https/] );
 
-  my $lenghtener = WWW::Lenghten->new;
+  my $lengthener = WWW::Lenghten->new;
 
   return ($u->host ~~ [qw/is.gd goo.gl/])
          ? $lengthener->try($u)
