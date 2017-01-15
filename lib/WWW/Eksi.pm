@@ -14,7 +14,7 @@ use experimental 'smartmatch';
 use URI;
 use Furl;
 use Mojo::DOM;
-use WWW::Expand;
+use WWW::Lengthen;
 
 use DateTime;
 use DateTime::Format::Strptime;
@@ -189,8 +189,10 @@ sub _lengthen{
   my $u = URI->new($url) if $url;
   return 0 unless ( $url && $u && $u->scheme ~~ [qw/http https/] );
 
+  my $lenghtener = WWW::Lenghten->new;
+
   return ($u->host ~~ [qw/is.gd goo.gl/])
-         ? expand $u
+         ? $lengthener->try($u)
          : $u;
 }
 

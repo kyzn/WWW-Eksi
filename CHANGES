@@ -1,3 +1,6 @@
+0.21  2017-01-15
+  - Use WWW::Lengthen (WWW::Expand has failing tests)
+
 0.20  2017-01-15
   - Renamed to WWW::Eksi (WWW::Eksisozluk is now an alias)
   - Removed DEBE (no more published since 2017-01-13)
