@@ -1,5 +1,4 @@
 package WWW::Eksi;
-our $VERSION='0.23';
 
 =head1 NAME
 
