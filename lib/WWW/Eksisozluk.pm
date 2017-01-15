@@ -7,7 +7,7 @@ use WWW::Eksi;
  
 BEGIN {
     push our @ISA, 'WWW::Eksi';
-    our $VERSION = 0.23;
+    our $VERSION = $WWW::Eksi::VERSION;
 }
 
 1;
