@@ -160,7 +160,7 @@ sub download_entry{
   return $e;
 }
 
-=head2 ghebe
+=head2 ghebe($politeness_delay)
 
 Returns an array of entries for top posts of last week.
 Ordered from more popular to less popular.
@@ -221,20 +221,20 @@ sub _process_entry{
   $e=~s/href="(https?:\/\/(goo\.gl|is\.gd)[^"]*)"/"href=\""._lengthen($1)."\""/ieg;
 
   # Make hidden references (akıllı bkz) visible
-  $e=~s/<sup class=\"ab\"><([^<]*)(data-query=\")([^>]*)\">\*<\/a><\/sup>/<$1$2$3\">\(* $3\)<\/a>/g;
+  $e=~s/(<sup class="ab"><a data-query=")([^"]*)("[^<>]*>)\*/$1$2$3* ($2)/g;
 
   # Make local links global
   $e=~s/href="\//target="_blank" href="https:\/\/eksisozluk.com\//g;
-  
+
   # Force no decoration to disable underline in Gmail
   $e=~s/href="/style="text-decoration:none;" href="/g;
-  
+
   # Add JPG to imgur images with no extension
   $e=~s/(href="https?:\/\/[^.]*\.?imgur.com\/\w{7})"/$1\.jpg"/g;
 
   # Make JPG/PNG images visible
   $e=~s/(href="([^"]*\.(jpe?g|png)(:large)?)"[^<]*<\/a>)/$1<br><br><img src="$2"><br><br>/g;
-  
+
   # Add NW arrow to external links
   $e=~s/(https?:\/\/(?!eksisozluk.com)([^\/<]*\.[^\/<]*)[^<]*<\/a>)/$1 \($2 &#8599;\)/g;
 
@@ -261,7 +261,7 @@ This software is copyright (c) 2017 by Kivanc Yazan.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-Content you reach by using this module might be subject to copyright 
+Content you reach by using this module might be subject to copyright
 terms of Eksisozluk. See eksisozluk.com for details.
 
 =cut
