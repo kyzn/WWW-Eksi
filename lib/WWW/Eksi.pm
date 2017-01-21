@@ -32,6 +32,7 @@ use URI;
 use Furl;
 use Mojo::DOM;
 use WWW::Lengthen;
+use IO::Socket::SSL;
 
 use DateTime;
 use DateTime::Format::Strptime;
@@ -49,7 +50,7 @@ sub new{
     base     => 'https://www.eksisozluk.com',
     entry    => 'https://www.eksisozluk.com/entry/',
     ghebe    => 'https://www.eksisozluk.com/istatistik/gecen-haftanin-en-begenilen-entryleri',
-    strp_dt  => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y%H:%M', on_error=>'croak'),
+    strp_dt  => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y%H:%M'),
     strp_d   => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y'),
   }, shift;
 }
@@ -129,7 +130,7 @@ sub download_entry{
                     ? $self->{strp_dt}->parse_datetime($date_posted.$time_posted)
                     : $self->{strp_d}->parse_datetime($date_posted);
   $e->{update_time} = $time_updated
-                    ? $self->{strp_dt}->parse_datetime( 
+                    ? $self->{strp_dt}->parse_datetime(
                       ($date_updated || $date_posted).$time_updated)
                     : '';
 
