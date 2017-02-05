@@ -63,7 +63,7 @@ This is an alternative list to DEBE, which is discontinued.
 
 # AUTHOR
 
-Kivanc Yazan <kyzn@cpan.org>
+Kivanc Yazan `<kyzn at cpan.org>`
 
 # CONTRIBUTORS
 

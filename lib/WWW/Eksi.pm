@@ -302,7 +302,7 @@ __END__
 
 =head1 AUTHOR
 
-Kivanc Yazan E<lt>kyzn@cpan.orgE<gt>
+Kivanc Yazan C<< <kyzn at cpan.org> >>
 
 =head1 CONTRIBUTORS
 
