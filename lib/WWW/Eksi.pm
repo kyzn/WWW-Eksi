@@ -296,6 +296,23 @@ sub _process_entry{
 
 }
 
+sub _entry_not_found{
+
+  return {
+    topic_title    => '?',
+    topic_url      => '?',
+    topic_channels => [],
+    author_name    => '?',
+    author_id      => 0,
+    body_raw       => "<i>bu entry silinmi&#351;.</i>",
+    body_text      => "bu entry silinmi&#351;.",
+    body_processed => "<i>bu entry silinmi&#351;.</i>",
+    fav_count      => '?',
+    create_time    => 0,
+    update_time    => 0,
+  };
+}
+
 1;
 
 __END__
