@@ -53,9 +53,9 @@ sub new{
   my $today = DateTime->now->ymd;
 
   my $eksi = {
-    base     => 'https://www.eksisozluk.com',
-    entry    => 'https://www.eksisozluk.com/entry/',
-    ghebe    => 'https://www.eksisozluk.com/istatistik/gecen-haftanin-en-begenilen-entryleri',
+    base     => 'https://eksisozluk.com',
+    entry    => 'https://eksisozluk.com/entry/',
+    ghebe    => 'https://eksisozluk.com/istatistik/gecen-haftanin-en-begenilen-entryleri',
     strp_dt  => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y%H:%M'),
     strp_d   => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y'),
     doludolu => 'https://eksisozluk.com/basliklar/ara?SearchForm.When.From='.$today.'T00:00:00&SearchForm.When.To='.$today.'T23:59:59&SearchForm.SortOrder=Count',
