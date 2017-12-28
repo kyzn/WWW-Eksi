@@ -1,7 +1,6 @@
 use warnings;
 use strict;
 use Test::More;
-use File::Slurper;
 use WWW::Eksi;
 
 # Redefine _download for offline testing with minimal working example.
