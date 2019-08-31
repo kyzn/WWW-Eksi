@@ -49,7 +49,7 @@ Returns a new WWW::Eksi object.
 
 =cut
 
-sub new{
+sub new {
   my $class = shift;
   my $today = DateTime->now->ymd;
 
@@ -89,14 +89,14 @@ Takes entry id as argument, returns its data (if available) as follows.
 
 =cut
 
-sub download_entry{
+sub download_entry {
   my ($self,$id) = @_;
   my $data = $self->_download($self->{entry}.$id) if ($id && $id=~/^\d{1,}$/);
   return unless $data;
   return $self->_parse_entry($data,$id);
 }
 
-sub _parse_entry{
+sub _parse_entry {
   my ($self,$data, $id) = @_;
   return unless $data;
 
@@ -190,7 +190,7 @@ Ordered from more popular to less popular.
 
 =cut
 
-sub ghebe{
+sub ghebe {
   my ($self, $sleep_seconds) = @_;
   return $self->_get_list($sleep_seconds,$self->{ghebe});
 }
@@ -202,12 +202,12 @@ Ordered from more popular to less popular.
 
 =cut
 
-sub debe{
+sub debe {
   my ($self, $sleep_seconds) = @_;
   return $self->_get_list($sleep_seconds,$self->{debe});
 }
 
-sub _get_list{
+sub _get_list {
   my ($self, $sleep_seconds, $url) = @_;
   $sleep_seconds //= 0;
   my $data = $self->_download($url);
@@ -227,7 +227,7 @@ sub _get_list{
   return @entries;
 }
 
-sub _download{
+sub _download {
   my ($self,$url) = @_;
 
   my $u = URI->new($url) if $url;
@@ -240,7 +240,7 @@ sub _download{
     : 0;
 }
 
-sub _lengthen{
+sub _lengthen {
   my ($self, $url) = @_;
 
   my $u = URI->new($url) if $url;
@@ -253,7 +253,7 @@ sub _lengthen{
          : $u;
 }
 
-sub _process_entry{
+sub _process_entry {
   my ($self,$e) = @_;
   return unless $e;
 
@@ -282,7 +282,7 @@ sub _process_entry{
 
 }
 
-sub _entry_not_found{
+sub _entry_not_found {
 
   return {
     topic_title    => '?',
