@@ -22,6 +22,10 @@ Provides easy access to entries and lists of entries.
   my @debe_fast = $e->debe;    # might get rate limited
   my @debe_slow = $e->debe(5); # add a politeness delay
 
+  # Alternative list of yesterday's popular entries
+  my @doludolu_fast = $e->doludolu;    # might get rate limited
+  my @doludolu_slow = $e->doludolu(5); # add a politeness delay
+
   # Single entry
   my $entry   = $e->download_entry(1);
 
@@ -60,6 +64,7 @@ sub new {
     ghebe    => 'https://eksisozluk.com/istatistik/gecen-haftanin-en-begenilen-entryleri',
     strp_dt  => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y%H:%M'),
     strp_d   => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y'),
+    doludolu => 'https://eksisozluk.com/basliklar/ara?SearchForm.When.From='.$today.'T00:00:00&SearchForm.When.To='.$today.'T23:59:59&SearchForm.SortOrder=Count',
   };
 
   return bless $eksi, $class;
@@ -225,6 +230,37 @@ sub _get_list {
   }
 
   return @entries;
+}
+
+=head2 doludolu($politeness_delay)
+
+Returns an array of entries with alternative top posts of yesterday.
+Ordered from more popular to less popular.
+
+=cut
+
+sub doludolu {
+  my $self      = shift;
+  my $sleep_sec = shift // 0;
+  my $data      = $self->_download($self->{doludolu});
+  my @doludolu  = ();
+  return unless $data;
+
+  my $dom   = Mojo::DOM->new($data);
+  my $links = $dom
+            ->at('ul[class=topic-list]')
+            ->find('a')
+            ->map(sub{$_->{href}=~m/^(.*)\?/})
+            ->to_array;
+
+  foreach my $link (@$links){
+    my $entry_html = $self->_download($self->{base}.$link.'?a=dailynice');
+    my $entry_hash = $self->_parse_entry($entry_html);
+    push @doludolu, $entry_hash;
+    sleep $sleep_sec;
+  }
+
+  return @doludolu;
 }
 
 sub _download {
