@@ -60,7 +60,7 @@ sub new {
   my $eksi = {
     base     => 'https://eksisozluk.com',
     entry    => 'https://eksisozluk.com/entry/',
-    debe     => 'https://eksisozluk.com/istatistik/dunun-en-begenilen-entryleri',
+    debe     => 'https://eksisozluk.com/debe',
     ghebe    => 'https://eksisozluk.com/istatistik/gecen-haftanin-en-begenilen-entryleri',
     strp_dt  => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y%H:%M'),
     strp_d   => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y'),
