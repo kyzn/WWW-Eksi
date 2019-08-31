@@ -19,7 +19,8 @@ Provides easy access to entries and lists of entries.
   my @ghebe_slow = $e->ghebe(5); # add a politeness delay
 
   # Yesterday's most popular entries
-  my @doludolu   = $e->doludolu(5);
+  my @debe_fast = $e->debe;    # might get rate limited
+  my @debe_slow = $e->debe(5); # add a politeness delay
 
   # Single entry
   my $entry   = $e->download_entry(1);
@@ -55,10 +56,10 @@ sub new{
   my $eksi = {
     base     => 'https://eksisozluk.com',
     entry    => 'https://eksisozluk.com/entry/',
+    debe     => 'https://eksisozluk.com/istatistik/dunun-en-begenilen-entryleri',
     ghebe    => 'https://eksisozluk.com/istatistik/gecen-haftanin-en-begenilen-entryleri',
     strp_dt  => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y%H:%M'),
     strp_d   => DateTime::Format::Strptime->new( pattern => '%d.%m.%Y'),
-    doludolu => 'https://eksisozluk.com/basliklar/ara?SearchForm.When.From='.$today.'T00:00:00&SearchForm.When.To='.$today.'T23:59:59&SearchForm.SortOrder=Count',
   };
 
   return bless $eksi, $class;
@@ -190,55 +191,40 @@ Ordered from more popular to less popular.
 =cut
 
 sub ghebe{
-  my $self      = shift;
-  my $sleep_sec = shift // 0;
-  my $data      = $self->_download($self->{ghebe});
+  my ($self, $sleep_seconds) = @_;
+  return $self->_get_list($sleep_seconds,$self->{ghebe});
+}
+
+=head2 debe($politeness_delay)
+
+Returns an array of entries for top posts of yesterday.
+Ordered from more popular to less popular.
+
+=cut
+
+sub debe{
+  my ($self, $sleep_seconds) = @_;
+  return $self->_get_list($sleep_seconds,$self->{debe});
+}
+
+sub _get_list{
+  my ($self, $sleep_seconds, $url) = @_;
+  $sleep_seconds //= 0;
+  my $data = $self->_download($url);
   return unless $data;
 
   my $dom   = Mojo::DOM->new($data);
   my $links = $dom->at('ol[class~=stats]')->find('a');
   my $ids   = $links->map(sub{$_->{href}=~m/%23(\d+)$/})->to_array;
-  my @ghebe = ();
+  my @entries = ();
 
   foreach my $id (@$ids){
     my $entry = $self->download_entry($id);
-    push @ghebe, $entry;
-    sleep $sleep_sec;
+    push @entries, $entry;
+    sleep $sleep_seconds
   }
 
-  return @ghebe;
-}
-
-=head2 doludolu($politeness_delay)
-
-Returns an array of entries for top posts of yesterday.
-Ordered from more popular to less popular.
-This is an alternative list to DEBE, which is discontinued.
-
-=cut
-
-sub doludolu{
-  my $self      = shift;
-  my $sleep_sec = shift // 0;
-  my $data      = $self->_download($self->{doludolu});
-  my @doludolu  = ();
-  return unless $data;
-
-  my $dom   = Mojo::DOM->new($data);
-  my $links = $dom
-            ->at('ul[class=topic-list]')
-            ->find('a')
-            ->map(sub{$_->{href}=~m/^(.*)\?/})
-            ->to_array;
-
-  foreach my $link (@$links){
-    my $entry_html = $self->_download($self->{base}.$link.'?a=dailynice');
-    my $entry_hash = $self->_parse_entry($entry_html);
-    push @doludolu, $entry_hash;
-    sleep $sleep_sec;
-  }
-
-  return @doludolu;
+  return @entries;
 }
 
 sub _download{
