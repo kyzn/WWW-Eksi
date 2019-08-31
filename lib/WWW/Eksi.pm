@@ -197,7 +197,22 @@ Ordered from more popular to less popular.
 
 sub ghebe {
   my ($self, $sleep_seconds) = @_;
-  return $self->_get_list($sleep_seconds,$self->{ghebe});
+  $sleep_seconds //= 0;
+  my $data = $self->_download($self->{ghebe});
+  return unless $data;
+
+  my $dom   = Mojo::DOM->new($data);
+  my $links = $dom->at('ol[class~=stats]')->find('a');
+  my $ids   = $links->map(sub{$_->{href}=~m/%23(\d+)$/})->to_array;
+  my @entries = ();
+
+  foreach my $id (@$ids){
+    my $entry = $self->download_entry($id);
+    push @entries, $entry;
+    sleep $sleep_seconds
+  }
+
+  return @entries;
 }
 
 =head2 debe($politeness_delay)
@@ -209,18 +224,13 @@ Ordered from more popular to less popular.
 
 sub debe {
   my ($self, $sleep_seconds) = @_;
-  return $self->_get_list($sleep_seconds,$self->{debe});
-}
-
-sub _get_list {
-  my ($self, $sleep_seconds, $url) = @_;
   $sleep_seconds //= 0;
-  my $data = $self->_download($url);
+  my $data = $self->_download($self->{debe});
   return unless $data;
 
   my $dom   = Mojo::DOM->new($data);
-  my $links = $dom->at('ol[class~=stats]')->find('a');
-  my $ids   = $links->map(sub{$_->{href}=~m/%23(\d+)$/})->to_array;
+  my $links = $dom->at('ul[class~=partial]')->find('a');
+  my $ids   = $links->map(sub{$_->{href}=~m/\/(\d+)$/})->to_array;
   my @entries = ();
 
   foreach my $id (@$ids){
