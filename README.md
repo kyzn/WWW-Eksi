@@ -20,6 +20,10 @@ Provides easy access to entries and lists of entries.
     my @debe_fast = $e->debe;    # might get rate limited
     my @debe_slow = $e->debe(5); # add a politeness delay
 
+    # Alternative list of yesterday's popular entries
+    my @doludolu_fast = $e->doludolu;    # might get rate limited
+    my @doludolu_slow = $e->doludolu(5); # add a politeness delay
+
     # Single entry
     my $entry   = $e->download_entry(1);
 
@@ -59,6 +63,11 @@ Ordered from more popular to less popular.
 ## debe($politeness\_delay)
 
 Returns an array of entries for top posts of yesterday.
+Ordered from more popular to less popular.
+
+## doludolu($politeness\_delay)
+
+Returns an array of entries with alternative top posts of yesterday.
 Ordered from more popular to less popular.
 
 # AUTHOR
