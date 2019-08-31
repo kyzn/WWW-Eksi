@@ -109,3 +109,6 @@ $RECYCLE.BIN/
 
 #gitignore.io did not add .project under eclipse, hence
 .project
+
+#also prevent builds from accidentally being uploaded
+WWW-Eksi*
