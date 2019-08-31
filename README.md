@@ -17,7 +17,8 @@ Provides easy access to entries and lists of entries.
     my @ghebe_slow = $e->ghebe(5); # add a politeness delay
 
     # Yesterday's most popular entries
-    my @doludolu   = $e->doludolu(5);
+    my @debe_fast = $e->debe;    # might get rate limited
+    my @debe_slow = $e->debe(5); # add a politeness delay
 
     # Single entry
     my $entry   = $e->download_entry(1);
@@ -55,11 +56,10 @@ Takes entry id as argument, returns its data (if available) as follows.
 Returns an array of entries for top posts of last week.
 Ordered from more popular to less popular.
 
-## doludolu($politeness\_delay)
+## debe($politeness\_delay)
 
 Returns an array of entries for top posts of yesterday.
 Ordered from more popular to less popular.
-This is an alternative list to DEBE, which is discontinued.
 
 # AUTHOR
 
