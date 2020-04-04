@@ -229,7 +229,7 @@ sub debe {
   return unless $data;
 
   my $dom   = Mojo::DOM->new($data);
-  my $links = $dom->at('ul[class~=partial]')->find('a');
+  my $links = $dom->find('ul[class~=partial]')->[1]->find('a');
   my $ids   = $links->map(sub{$_->{href}=~m/\/(\d+)$/})->to_array;
   my @entries = ();
 
