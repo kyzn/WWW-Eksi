@@ -359,7 +359,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2017 by Kivanc Yazan.
+This software is copyright (c) 2020 by Kivanc Yazan.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
