@@ -209,7 +209,7 @@ sub ghebe {
   foreach my $id (@$ids){
     my $entry = $self->download_entry($id);
     push @entries, $entry;
-    sleep $sleep_seconds
+    sleep $sleep_seconds;
   }
 
   return @entries;
@@ -236,7 +236,7 @@ sub debe {
   foreach my $id (@$ids){
     my $entry = $self->download_entry($id);
     push @entries, $entry;
-    sleep $sleep_seconds
+    sleep $sleep_seconds;
   }
 
   return @entries;
